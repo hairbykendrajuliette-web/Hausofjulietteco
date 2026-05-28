@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair By Kendra Juliette - Professional Hair & Makeup Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            background: white;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+        nav a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(245, 245, 245, 0.5) 0%, rgba(240, 245, 242, 0.3) 100%);
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #333;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #555;
+        }
+        .btn-secondary {
+            border: 2px solid #333;
+            color: #333;
+            background: transparent;
+        }
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+        .features {
+            padding: 60px 20px;
+            background: #f9f9f9;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .services {
+            padding: 60px 20px;
+        }
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .service-card {
+            background: #f5f5f5;
+            padding: 30px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            transition: box-shadow 0.3s;
+        }
+        .service-card:hover {
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .service-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .service-card ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        .service-card li {
+            padding: 5px 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .service-card li:before {
+            content: "✓ ";
+            color: #333;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .page-content {
+            display: none;
+            padding: 40px 20px;
+        }
+        .page-content.active {
+            display: block;
+        }
+        .page-content h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 0.95rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .success-message {
+            display: none;
+            background: #f0f0f0;
+            border: 2px solid #999;
+            border-radius: 4px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .success-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .calculator-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .calculator-inputs {
+            background: #f5f5f5;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .calculator-summary {
+            background: #f0f0f0;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        .cost-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .cost-line.total {
+            border-bottom: 2px solid #999;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .total-amount {
+            font-size: 2.5rem;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .contact-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .contact-info {
+            background: #f5f5f5;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .contact-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .contact-item {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+        }
+        .contact-item h4 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .contact-item p, .contact-item a {
+            color: #666;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+        footer h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .faq-item {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .faq-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .faq-item p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            nav a {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+            nav .mobile-nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                border-bottom: 1px solid #ddd;
+            }
+            nav .mobile-nav.active {
+                display: flex;
+            }
+            nav .mobile-nav a {
+                display: block;
+                padding: 15px 20px;
+                border: none;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .calculator-summary {
+                position: static;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo" onclick="showPage('home')">🌿 Hair By Kendra Juliette</div>
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <div id="desktopNav" style="display: flex; gap: 30px;">
+                    <a href="#" onclick="showPage('home'); return false;" class="nav-link active">Home</a>
+                    <a href="#" onclick="showPage('services'); return false;" class="nav-link">Services</a>
+                    <a href="#" onclick="showPage('booking'); return false;" class="nav-link">Book Now</a>
+                    <a href="#" onclick="showPage('calculator'); return false;" class="nav-link">Calculator</a>
+                    <a href="#" onclick="showPage('contact'); return false;" class="nav-link">Contact</a>
+                </div>
+                <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+            </div>
+        </div>
+        <div id="mobileNav" class="mobile-nav">
+            <a href="#" onclick="showPage('home'); return false;">Home</a>
+            <a href="#" onclick="showPage('services'); return false;">Services</a>
+            <a href="#" onclick="showPage('booking'); return false;">Book Now</a>
+            <a href="#" onclick="showPage('calculator'); return false;">Calculator</a>
+            <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+        </div>
+    </nav>
+
+    <div id="home" class="page-content active">
+        <section class="hero">
+            <h1>Hair By Kendra Juliette</h1>
+            <p class="tagline">Professional Hair & Makeup Artistry</p>
+            <p class="subtitle">Specializing in bridal beauty for your most important moments</p>
+            <button class="btn btn-primary" onclick="showPage('booking')">Book Now</button>
+            <button class="btn btn-secondary" onclick="showPage('contact')">Get in Touch</button>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose Us</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">👰</div>
+                        <h3>Bridal Expertise</h3>
+                        <p>Specialized in creating stunning bridal looks that last all day</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h3>Professional Artists</h3>
+                        <p>Experienced makeup and hair artists with meticulous attention to detail</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💄</div>
+                        <h3>Premium Products</h3>
+                        <p>Using high-quality, long-lasting products for flawless results</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; padding: 60px 20px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #333;">Ready to Glow?</h2>
+            <p style="color: #666; margin-bottom: 30px; font-size: 1.1rem;">Let's create a look you'll absolutely love</p>
+            <button class="btn btn-primary" onclick="showPage('calculator')">Calculate Your Wedding Cost</button>
+        </section>
+    </div>
+
+    <div id="services" class="page-content">
+        <div class="container">
+            <h1>Our Services & Pricing</h1>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3><span style="font-size: 2rem;">💇‍♀️</span> Bridal Hair</h3>
+                    <div class="service-price">$150</div>
+                    <ul>
+                        <li>Full bridal hair styling</li>
+                        <li>Consultation included</li>
+                        <li>Long-lasting hold</li>
+                        <li>Trial run available</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3><span style="font-size: 2rem;">💄</span> Bridal Makeup</h3>
+                    <div class="service-price">$150</div>
+                    <ul>
+                        <li>Full bridal makeup application</li>
+                        <li>Camera-ready finish</li>
+                        <li>Long-wear formulas</li>
+                        <li>Touch-up kit provided</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3><span style="font-size: 2rem;">👯‍♀️</span> Party Services</h3>
+                    <div class="service-price">$125/person</div>
+                    <ul>
+                        <li>Hair & Makeup (per person)</li>
+                        <li>Bridesmaids, mothers, guests</li>
+                        <li>Coordinated looks</li>
+                        <li>Flexible scheduling</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3><span style="font-size: 2rem;">🚗</span> Travel Fee</h3>
+                    <div class="service-price">$0.72/mile</div>
+                    <ul>
+                        <li>Starts at $25 for 20+ miles</li>
+                        <li>Round-trip distance</li>
+                        <li>Includes setup & breakdown</li>
+                        <li>Flexible payment options</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3><span style="font-size: 2rem;">⏰</span> Day-Of Touch-Ups</h3>
+                    <div class="service-price">$100/hour</div>
+                    <ul>
+                        <li>Hair touch-ups & adjustments</li>
+                        <li>Makeup refreshing & reapplication</li>
+                        <li>I stay on-site throughout event</li>
+                        <li>Quick fixes for any needs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: #f0f0f0; border: 1px solid #999; border-radius: 4px; padding: 30px; margin-top: 30px;">
+                <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 15px;">Custom Pricing</h3>
+                <p style="color: #666; margin-bottom: 20px;">For large bridal parties, multi-day events, or special requests, we offer custom packages. Contact us to discuss your specific needs!</p>
+                <button class="btn btn-primary" onclick="showPage('contact')">Request Custom Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="booking" class="page-content">
+        <div class="container">
+            <h1>Book Your Appointment</h1>
+            
+            <div id="successMessage" class="success-message">
+                <h2>✅ Booking Submitted!</h2>
+                <p>Thank you! We'll review your information and contact you within 24 hours to confirm your appointment.</p>
+            </div>
+
+            <form class="booking-form" onsubmit="submitBooking(event)">
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Date *</label>
+                            <input type="date" name="eventDate" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">Event Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Event Type</label>
+                            <select name="eventType">
+                                <option>Bridal Event</option>
+                                <option>Bridesmaid</option>
+                                <option>Mother of Bride/Groom</option>
+                                <option>Guest</option>
+                                <option>Other Event</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select name="serviceType">
+                                <option>Hair & Makeup</option>
+                                <option>Hair Only</option>
+                                <option>Makeup Only</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Location *</label>
+                        <input type="text" name="location" placeholder="Address or venue name" required>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">Your Preferences</h3>
+                    <div class="form-group">
+                        <label>Describe your desired hair and makeup style</label>
+                        <textarea name="preferences" placeholder="Color preferences, inspiration photos, specific requests..."></textarea>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #333; margin-bottom: 15px;">Additional Information</h3>
+                    <div class="form-group">
+                        <label>Any allergies, skin sensitivities, or special requests?</label>
+                        <textarea name="additionalNotes"></textarea>
+                    </div>
+                </div>
+
+                <div style="background: #f0f0f0; border: 1px solid #999; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-size: 0.9rem;">
+                    <p style="margin-bottom: 10px;"><strong>Next Step:</strong> After you submit this form, we'll review your information and contact you within 24 hours.</p>
+                    <p><strong>Contract Terms:</strong> A $75 non-refundable deposit per artist is required to reserve your event.</p>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Booking Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="calculator" class="page-content">
+        <div class="container">
+            <h1>Wedding Cost Calculator</h1>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Estimate your total wedding beauty services cost</p>
+            
+            <div class="calculator-wrapper">
+                <div class="calculator-inputs">
+                    <h3 style="color: #333; margin-bottom: 20px;">Calculate Your Total</h3>
+                    
+                    <div class="form-group">
+                        <label>💇‍♀️ Bridal Hair Services</label>
+                        <input type="number" id="bridalHair" min="0" value="1" onchange="calculateTotal()">
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">@ $150 per service</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>💄 Bridal Makeup Services</label>
+                        <input type="number" id="bridalMakeup" min="0" value="1" onchange="calculateTotal()">
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">@ $150 per service</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>👯‍♀️ Party Members</label>
+                        <input type="number" id="partyMembers" min="0" value="0" onchange="calculateTotal()">
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">@ $125 per person</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🚗 Travel Distance (miles)</label>
+                        <input type="number" id="travelDistance" min="0" step="0.1" value="0" onchange="calculateTotal()">
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">@ $0.72/mile</p>
+                    </div>
+                </div>
+
+                <div class="calculator-summary">
+                    <h3 style="color: #333; margin-bottom: 20px;">Cost Summary</h3>
+                    
+                    <div class="cost-line">
+                        <span>💇‍♀️ Bridal Hair</span>
+                        <span id="hairTotal">$150.00</span>
+                    </div>
+                    
+                    <div class="cost-line">
+                        <span>💄 Bridal Makeup</span>
+                        <span id="makeupTotal">$150.00</span>
+                    </div>
+                    
+                    <div class="cost-line">
+                        <span>👯‍♀️ Party Members</span>
+                        <span id="partyTotal">$0.00</span>
+                    </div>
+                    
+                    <div class="cost-line">
+                        <span>🚗 Travel Fee</span>
+                        <span id="travelTotal">$0.00</span>
+                    </div>
+
+                    <div class="cost-line total">
+                        <span>Estimated Total</span>
+                        <span id="grandTotal">$300.00</span>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="showPage('booking')">Book This Package</button>
+                    
+                    <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top: 15px;">* Final pricing confirmed after consultation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="page-content">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            
+            <div class="contact-wrapper">
+                <div>
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <div>
+                                <h4>📍 Studio Location</h4>
+                                <p>Contact us for address</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div>
+                                <h4>📱 Phone</h4>
+                                <a href="tel:+13214374368">(321) 437-4368</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div>
+                                <h4>📧 Email</h4>
+                                <a href="mailto:hairbykendrajuliette@gmail.com">hairbykendrajuliette@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div>
+                                <h4>⏰ Hours</h4>
+                                <p>Available by appointment</p>
+                                <p>Bridal services start early</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info" style="margin-top: 20px; background: #f0f0f0; border: 1px solid #999;">
+                        <h3>Travel Area</h3>
+                        <p>We service the <strong>greater Florida area</strong>. Travel fees apply based on distance from our studio.</p>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Quick Message</h3>
+                    <form style="display: flex; flex-direction: column; gap: 15px;">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Your Phone" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div style="background: #f0f0f0; border: 1px solid #999; padding: 30px; border-radius: 4px; margin-top: 40px;">
+                <h2 style="color: #333; text-align: center; margin-bottom: 30px; font-size: 1.8rem;">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>What's the deposit requirement?</h4>
+                        <p>$75 non-refundable deposit per artist is required to reserve your event. This will be deducted from your total on the day of service.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>When is payment due?</h4>
+                        <p>The balance is due in full on the day of service. We accept cash or prepayment via Visa/Mastercard. We do not accept checks.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What's your cancellation policy?</h4>
+                        <p>Cancellations must be made within 30 days of your scheduled appointment. After that time, you're responsible for the cost of all scheduled services.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Can I change the number of services?</h4>
+                        <p>Yes! All changes must be made 60 days prior to your event.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Do you offer trial services?</h4>
+                        <p>Yes! Trial runs are available so you can see exactly how your look will appear on the day of your event.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What about gratuity?</h4>
+                        <p>Gratuity is appreciated but not included in pricing. Our satisfied clients typically give 15-20% as a token of appreciation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>🌿 Hair By Kendra Juliette</h3>
+        <p>📱 (321) 437-4368 | 📧 hairbykendrajuliette@gmail.com</p>
+        <p>Instagram: <strong>@hausofjulietteco</strong></p>
+        <p>© 2024 Hair By Kendra Juliette. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            document.getElementById('mobileNav').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        function submitBooking(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').classList.add('show');
+            document.querySelector('.booking-form').style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+                document.querySelector('.booking-form').style.display = 'block';
+                document.querySelector('.booking-form').reset();
+                showPage('home');
+            }, 2000);
+        }
+
+        function calculateTotal() {
+            const bridalHair = parseFloat(document.getElementById('bridalHair').value || 0) * 150;
+            const bridalMakeup = parseFloat(document.getElementById('bridalMakeup').value || 0) * 150;
+            const partyMembers = parseFloat(document.getElementById('partyMembers').value || 0) * 125;
+            const travelDistance = parseFloat(document.getElementById('travelDistance').value || 0) * 0.72;
+            
+            const total = bridalHair + bridalMakeup + partyMembers + travelDistance;
+            
+            document.getElementById('hairTotal').textContent = '$' + bridalHair.toFixed(2);
+            document.getElementById('makeupTotal').textContent = '$' + bridalMakeup.toFixed(2);
+            document.getElementById('partyTotal').textContent = '$' + partyMembers.toFixed(2);
+            document.getElementById('travelTotal').textContent = '$' + travelDistance.toFixed(2);
+            document.getElementById('grandTotal').textContent = '$' + total.toFixed(2);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTotal();
+        });
+    </script>
+</body>
+</html>
