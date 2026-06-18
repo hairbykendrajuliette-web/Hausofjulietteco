@@ -1116,25 +1116,35 @@
             calculateTotal();
         });
 
-        // ===== REVIEWS =====
-        function loadReviews() {
-            try { var s = localStorage.getItem('hoj_reviews'); return s ? JSON.parse(s) : []; }
-            catch(e) { return []; }
+        // ===== REVIEWS (shared live across all visitors via free cloud KV store) =====
+        var REVIEWS_NAMESPACE = 'hausofjulietteco-kendra-site';
+        var REVIEWS_KEY = 'client-reviews';
+        var REVIEWS_API = 'https://kvdb.io/' + REVIEWS_NAMESPACE + '/' + REVIEWS_KEY;
+
+        function loadReviewsRemote() {
+            return fetch(REVIEWS_API, { cache: 'no-store' })
+                .then(function(res) {
+                    if (!res.ok) return [];
+                    return res.json().catch(function() { return []; });
+                })
+                .then(function(data) { return Array.isArray(data) ? data : []; })
+                .catch(function() { return []; });
         }
-        function saveReview(review) {
-            var reviews = loadReviews();
-            reviews.unshift(review);
-            localStorage.setItem('hoj_reviews', JSON.stringify(reviews));
+        function saveReviewsRemote(reviews) {
+            return fetch(REVIEWS_API, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reviews)
+            }).catch(function() { /* fail silently, local render already happened */ });
         }
         function escapeHtml(str) {
             return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
-        function renderFeaturedReviews() {
-            var reviews = loadReviews();
+        function renderReviewCards(reviews) {
             var container = document.getElementById('featuredReviews');
             var empty = document.getElementById('reviewsEmpty');
             if (!container) return;
-            if (reviews.length === 0) { if (empty) empty.style.display = 'block'; return; }
+            if (!reviews || reviews.length === 0) { if (empty) empty.style.display = 'block'; container.innerHTML = ''; return; }
             if (empty) empty.style.display = 'none';
             container.innerHTML = reviews.slice(0, 3).map(function(r) {
                 var filled = parseInt(r.rating) || 5;
@@ -1145,6 +1155,16 @@
                     + '<div class="review-author">&mdash; ' + escapeHtml(r.name) + '</div>'
                     + '</div>';
             }).join('');
+        }
+        function renderFeaturedReviews() {
+            try {
+                var cached = localStorage.getItem('hoj_reviews_cache');
+                if (cached) renderReviewCards(JSON.parse(cached));
+            } catch(e) {}
+            loadReviewsRemote().then(function(reviews) {
+                renderReviewCards(reviews);
+                try { localStorage.setItem('hoj_reviews_cache', JSON.stringify(reviews)); } catch(e) {}
+            });
         }
         var _selectedStars = 5;
         function initStarPicker() {
@@ -1176,13 +1196,19 @@
                 })
             }).catch(function() { /* still proceed even if email fails to send */ });
 
-            saveReview(reviewData);
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewText').value = '';
             var msg = document.getElementById('reviewSuccess');
             msg.style.display = 'block';
             setTimeout(function() { msg.style.display = 'none'; }, 4000);
-            renderFeaturedReviews();
+
+            // Post live to the shared store so it shows for every visitor immediately
+            loadReviewsRemote().then(function(reviews) {
+                reviews.unshift(reviewData);
+                renderReviewCards(reviews);
+                try { localStorage.setItem('hoj_reviews_cache', JSON.stringify(reviews)); } catch(e) {}
+                saveReviewsRemote(reviews);
+            });
         }
         document.addEventListener('DOMContentLoaded', function() {
             renderFeaturedReviews();
