@@ -1013,7 +1013,23 @@
         <p>📱 (321) 437-4368 | 📧 hairbykendrajuliette@gmail.com</p>
         <p>Instagram: <strong>@hausofjulietteco</strong></p>
         <p>© 2024 Hair By Kendra Juliette. All rights reserved.</p>
+        <p id="visitorCount" style="font-size:9px;letter-spacing:1px;color:#5a5048;opacity:0.55;margin-top:14px;">&nbsp;</p>
     </footer>
+    <script>
+        (function() {
+            var namespace = 'hausofjulietteco-kendra-site';
+            var key = 'unique-visitors';
+            fetch('https://api.countapi.xyz/hit/' + namespace + '/' + key)
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    var el = document.getElementById('visitorCount');
+                    if (el && data && typeof data.value !== 'undefined') {
+                        el.textContent = 'visits: ' + data.value;
+                    }
+                })
+                .catch(function() { /* fail silently, no visible error to visitors */ });
+        })();
+    </script>
     <script>
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(page => {
@@ -1145,7 +1161,22 @@
             var name = document.getElementById('reviewName').value.trim();
             var text = document.getElementById('reviewText').value.trim();
             if (!name || !text) { alert('Please fill in your name and review.'); return; }
-            saveReview({ name: name, text: text, rating: _selectedStars, date: Date.now() });
+            var reviewData = { name: name, text: text, rating: _selectedStars, date: Date.now() };
+
+            // Email the review to Kendra via Formspree
+            fetch('https://formspree.io/f/xqejnwkn', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    _subject: 'New Review from ' + name,
+                    formType: 'Client Review',
+                    name: name,
+                    rating: _selectedStars + ' / 5 stars',
+                    review: text
+                })
+            }).catch(function() { /* still proceed even if email fails to send */ });
+
+            saveReview(reviewData);
             document.getElementById('reviewName').value = '';
             document.getElementById('reviewText').value = '';
             var msg = document.getElementById('reviewSuccess');
